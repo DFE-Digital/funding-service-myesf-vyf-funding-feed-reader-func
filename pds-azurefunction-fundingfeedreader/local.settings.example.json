@@ -1,0 +1,96 @@
+ {
+
+    "IsEncrypted": false,
+
+    "Values": {
+
+      "AzureWebJobsStorage": "",
+
+      "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+
+      "timerInterval": "",
+
+      "runMode": "", 
+
+      "taskBatchSize": "",
+
+      "includeReindex": ,
+
+      "cdb:endpointUri": "",
+
+      "cdb:endpointKey": "",
+
+      "cdb:dbName": "",
+
+      "cdb:fundingGroupCollectionName": "",
+
+      "cdb:providerFundingCollectionName": "",
+
+      "cdb:auditCollectionName": "",
+
+      "cdb:throughputSize": "",
+
+      "cdb:throughputWaitTimeSeconds": "",
+
+      "cdb:programaticallyChangeThroughput": "",
+
+      "LOCAL_cdb:endpointUri": "",
+
+      "LOCAL_cdb:endpointKey": "",
+
+      "DEV_cdb:endpointUri": "",
+
+      "DEV_cdb:endpointKey": "",
+
+      "LocalfundingsApi:baseUrl": "",
+
+      "fundingsApi:pageSize": "250",
+
+      "LOCAL_fundingsApi:baseUrl": "",
+
+      "CFSTest_fundingsApi:baseUrl": "",
+
+      "fundingsApi:baseUrl": "",
+
+      "ai:environment": "",
+
+      "ai:InstrumentationKey": "",
+
+      "as:adminKey": "",
+
+      "as:name": "",
+
+      "auth:useAuthentication": "true",
+
+      "auth:authority": "",
+
+      "auth:tenantId": "",
+
+      "local_auth:clientId": "",
+
+      "local_auth:clientSecret": "",
+
+      "auth:clientId": "",
+
+      "auth:clientSecret": "",
+
+      "auth:appIdUri": "",
+
+      "CFSTest_auth:clientId": "",
+
+      "CFSTest_auth:clientSecret": "",
+
+      "CFSTest_auth:appIdUri": "",
+
+      "vyf:baseUri": "",
+
+      "vyf:autoPullEndpointUri": "",
+
+      "vyf:apiKey": "",
+
+      "sb:connectionString": ""
+
+    }
+
+  }
+ 
