@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>obj\Debug\netcoreapp2.2\Test.xml</DocumentationFile>
+    <NoWarn>1701;1702;CS1591;SA1600;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.9.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.17.0" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Moq" Version="4.13.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+    <PackageReference Include="Pds.Core.CodeAnalysis.StyleCop" Version="1.0.0" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogger\ApplicationLogger.csproj" />
+    <ProjectReference Include="..\Clients\Clients.csproj" />
+    <ProjectReference Include="..\CorporateSchema\CorporateSchema.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\pds-azurefunction-fundingfeedreader\pdsazurefunctionfundingfeedreader.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="cloud.settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

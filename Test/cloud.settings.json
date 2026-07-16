@@ -1,0 +1,47 @@
+{
+  "ConnectionStrings": {
+    "con": "connection string"
+  },
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+
+    "timerInterval": "__functionTimerInterval__",
+    "runMode": "__functionRunMode__", // or default (increments) or recovery or off
+    "taskBatchSize": "__functiontaskBatchSize__",
+
+    "as:name": "__AzureSearchName__",
+    "as:adminKey": "__AzureSearchAdminKey__",
+
+    "cdb:endpointUri": "__cdbendpointUri__",
+    "cdb:endpointKey": "__cdbendpointKey__",
+    "cdb:dbName": "__cdbdbName__",
+    "cdb:fundingGroupCollectionName": "__cdbfundingGroupCollectionName__",
+    "cdb:providerFundingCollectionName": "__cdbproviderFundingCollectionName__",
+    "cdb:auditCollectionName": "__cdbauditCollectionName__",
+    "cdb:throughputSize": "__cdbthroughputSize__",
+    "cdb:throughputWaitTimeSeconds": "__cdbthroughputWaitTimeSeconds__",
+    "cdb:programaticallyChangeThroughput": "__cdbprogramaticallyChangeThroughput__",
+
+    "fundingsApi:baseUrl": "__cfsApiBaseUrl__",
+    "fundingsApi:pageSize": "__cfsApipageSize__",
+
+    "ai:environment": "__buildconfiguration__",
+
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "__aiconnection__",
+
+    "auth:useAuthentication": "__cfsApiAuthUseAuthentication__",
+    "auth:authority": "__auth_authority__",
+    "auth:tenantId": "__CfsApiAuthTenantId__",
+    "auth:clientId": "__CfsApiAuthClientId__",
+    "auth:clientSecret": "__CfsApiAuthClientSecret__",
+    "auth:appIdUri": "__CfsApiAuthAppIdUrl__",
+
+    "vyf:baseUri": "__vyfBaseUri__",
+    "vyf:autoPullEndpointUri": "__vyfAutoPullEndPointUri__",
+    "vyf:apiKey": "__VyfUiApiConfigurationSecretKey__",
+
+    "sb:connectionString": "__ServiceBusConnectionString__"
+  }
+}

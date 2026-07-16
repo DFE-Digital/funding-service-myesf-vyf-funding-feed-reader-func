@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>obj\Debug\netcoreapp2.2\CorporateSchema.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Pds.Core.CodeAnalysis.StyleCop" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

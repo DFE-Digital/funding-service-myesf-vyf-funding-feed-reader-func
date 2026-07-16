@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "pdsazurefunctionfundingfeedreader": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://myesf.local:{ServicePort}",
+      "httpPort": 34970,
+      "useSSL": false
+    }
+  }
+}
