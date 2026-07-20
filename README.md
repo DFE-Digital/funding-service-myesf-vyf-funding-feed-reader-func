@@ -10,9 +10,7 @@ The Manage Your Education and Skills Funding (MYESF) funding feed reader allows 
 
 ## About this project
 
-This project is an ASP.NET Core 8 web api utilising Azure App Service for deployment.
-
-The web api runs on an Azure App service on Azure.
+This project is a .Net 8 Isolated Worker Azure Function project utilizing an Azure Function App for deployment.
 
 **Note:** The project is currently being updated to be containerised via Docker where the deployment method and target will change, this document will be updated when these changes have been finalised.
 
@@ -124,64 +122,64 @@ In order to run the application locally a valid `local.settings.json` file will 
 ### Setting Details
 
 - **`AzureWebJobsStorage`**  
-  Value indicating which azure storage to use.
+  The Azure Storage connection string required by the Azure Functions runtime for operation and trigger management.
  
 - **`FUNCTIONS_WORKER_RUNTIME`**  
   dotnet.
 
 - **`timerInterval`**  
-  Timer interval numeric value.
+  The CRON expression defining the schedule used by the timer-triggered funding feed reader process.
 
 - **`runMode`**  
-  Indicating which mode to run, recovery or increment.
+  The conditional value for how the process should handle feed reader functions based on environment.
 
 - **`taskBatchSize`**  
-  Integer value of batch size to process.
+  Integer value of batch size of funding feed reader to process.
 
 - **`includeReindex`**  
   Boolean value to include reindexing or not.
 
 - **`cdb:endpointUri`**  
-  Unique local cdp URI link.
+  Unique Cosmos Db URI to use for local environment.
 
 - **`cdb:endpointKey`**  
-  Unique cdb end point connection string key value.
+  Unique Cosmos Db end point connection string key value.
 
 - **`cdb:dbName`**  
-  cdb database name.
+  Name of the Cosmos Db database to use.
 
 - **`cdb:fundingGroupCollectionName`**  
-  Value of funding group for cdb to use.
+  The name of the Cosmos Db collection used for funding data.
   
 - **`cdb:providerFundingCollectionName`**  
-  cdb provider funding collection name value.
+  The name of the Cosmos Db collection used for provider funding data.
   
 - **`cdb:auditCollectionName`**  
-  cdb audit collection name value.
+  The name of the Cosmos Db collection used for audit purposes.
 
 - **`cdb:throughputSize`**  
-  Numeric value of max throughput size.
+  Numeric value of max throughput size of the Cosmos Db results.
 
 - **`cdb:throughputWaitTimeSeconds`**  
-  Numeric value of time designated for throughput function to work.
+  Numeric value of time designated for throughput function to work to get data from Cosmos Db.
 
 - **`cdb:programaticallyChangeThroughput`**  
-  Boolean value for throughput change.
+  Boolean value for throughput change for Cosmos Db.
   
 - **`LOCAL_cdb:endpointUri`**  
-  Unique cdb local URI link.
+  Unique Cosmos Db URI link for the local environment.
   
 - **`LOCAL_cdb:endpointKey`**  
-  Unique cdb local connection string key value.
+  Unique Cosmos Db URI connection string key for the local environment.
   
 - **`DEV_cdb:endpointUri`**  
-   Unique cdb dev environment URI link.
+  Unique Cosmos Db URI link for the developer environment.
   
 - **`DEV_cdb:endpointKey`**  
-  Unique cdb dev environment connection string key value.
+  Unique Cosmos Db URI connection string key for the developer environment.
 
 - **`LocalfundingsApi:baseUrl`**  
-  Unique local funding base api url.
+  Unique local funding base api url for mockicg.
   
 - **`fundingsApi:pageSize`**  
   Maximum numeric value of funding api page size.
@@ -193,19 +191,19 @@ In order to run the application locally a valid `local.settings.json` file will 
   Url link for calculate funding service test api.
 
 - **`fundingsApi:baseUrl`**  
-  Unique funding base api url.
+  Unique funding base url for calculate funding swrvice.
   
 - **`ai:environment`**  
   Target environemnt to use value.
 
 - **`ai:InstrumentationKey`**  
-  Unique instrumentation key value.
+  Unique ai instrumentation key value.
 
 - **`as:adminKey`**  
-  Unique admin key value.
+  Unique Azure service admin key value.
   
 - **`as:name`**  
-  Name of the environemnt.
+  Name of the Azure service environemnt.
   
 - **`auth:useAuthentication`**  
   Boolean value to use authentication or not.
@@ -249,8 +247,13 @@ In order to run the application locally a valid `local.settings.json` file will 
 - **`sb:connectionString`**  
   Unique connection string for the sandbox environment.
 
-## Test execution
+## Build and Test
 
-### Tests
+To build and test locally, you can either use Visual Studio, Visual Studio Code or simply use dotnet CLI `dotnet build` and `dotnet test` more information in dotnet CLI can be found at <https://docs.microsoft.com/en-us/dotnet/core/tools/>.
 
-All of the tests can be found in the test.csproj. No local settings are required to run the tests.
+## Contribute
+
+To contribute,
+
+- If you are part of the team then create a branch for changes and then submit your changes for review by creating a pull request.
+- If you are external to the organisation then fork this repository and make necessary changes and then submit your changes for review by creating a pull request.
