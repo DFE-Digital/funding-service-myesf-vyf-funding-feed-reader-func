@@ -216,10 +216,10 @@ In order to run the application locally a valid `local.settings.json` file will 
   
 - **`local_auth:clientId`**  
   Unique local environemnt client id authentication key.
-
+  
 - **`local_auth:clientSecret`**
   Unique local environment client authentication secret key value.
-
+  
 - **`auth:clientId`**
   Unique client id authentication key.
 
