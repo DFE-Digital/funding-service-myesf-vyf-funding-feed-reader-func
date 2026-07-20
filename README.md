@@ -1,4 +1,4 @@
-# Manage Your Education and Skills Funding User Interface
+# Manage Your Education and Skills Funding Feed Reader Function
 
 The Manage Your Education and Skills Funding (MYESF) funding feed reader allows the following:
 
