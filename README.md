@@ -236,13 +236,13 @@ In order to run the application locally a valid `local.settings.json` file will 
   Uri for calculate funding service test environment.
 
 - **`vyf:baseUri`**  
-  VYF uri link.
+  The url of View Your Funding external api.
 
 - **`vyf:autoPullEndpointUri`**  
-  Uri path for VYF endpoint.
+  Uri path for View Your Funding endpoint.
 
 - **`vyf:apiKey`**  
-  Unique VYF api key value.
+  The api secret key of View Your Funding external api.
   
 - **`sb:connectionString`**  
   Unique connection string for the sandbox environment.
