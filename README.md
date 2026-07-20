@@ -217,15 +217,15 @@ In order to run the application locally a valid `local.settings.json` file will 
 - **`local_auth:clientId`**  
   Unique local environemnt client id authentication key.
   
-- **`local_auth:clientSecret`**
+- **`local_auth:clientSecret`**  
   Unique local environment client authentication secret key value.
-  
-- **`auth:clientId`**
+
+- **`auth:clientId`**  
   Unique client id authentication key.
-
-- **`auth:clientSecret`**
+  
+- **`auth:clientSecret`**  
   Unique client authentication secret key value.
-
+  
 - **`CFSTest_auth:clientId`**  
   Unique calculate funding service test environment client id value.
   
