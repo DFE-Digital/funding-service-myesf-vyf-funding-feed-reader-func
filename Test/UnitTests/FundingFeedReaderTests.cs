@@ -2,7 +2,6 @@
 using Clients;
 using CorporateSchema.Version4_00;
 using Domain;
-using Domain.Messages;
 using Domain.Models;
 using FluentAssertions;
 using Microsoft.Azure.Documents.Client;

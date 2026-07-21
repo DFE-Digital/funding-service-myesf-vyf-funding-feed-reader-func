@@ -1,7 +1,5 @@
-using CorporateSchema.Version4_00;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CorporateSchema.Version4_00
 {

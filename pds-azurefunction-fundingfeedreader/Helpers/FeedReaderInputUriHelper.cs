@@ -1,6 +1,4 @@
-﻿using CorporateSchema.Version4_00;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Identity.Client;
+﻿using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Linq;
 

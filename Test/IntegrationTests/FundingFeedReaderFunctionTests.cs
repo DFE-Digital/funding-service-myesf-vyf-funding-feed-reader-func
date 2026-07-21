@@ -1,7 +1,6 @@
 ﻿using Clients;
 using Domain;
 using FluentAssertions;
-using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Configuration;

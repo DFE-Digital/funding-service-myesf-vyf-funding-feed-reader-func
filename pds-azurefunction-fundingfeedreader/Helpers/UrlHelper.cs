@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pds_azurefunction_fundingfeedreader.Helpers
+﻿namespace Pds_azurefunction_fundingfeedreader.Helpers
 {
     /// <summary>
     /// The Url helper class.

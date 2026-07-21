@@ -1,5 +1,4 @@
-﻿using ApplicationLogger;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 

@@ -129,7 +129,7 @@ namespace Pds_azurefunction_fundingfeedreader
 
             if (string.IsNullOrEmpty(environmentVariables?.FundingsApiUri))
             {
-                    throw new ArgumentNullException("Fundings API cannot be null");
+                throw new ArgumentNullException("Fundings API cannot be null");
             }
 
             fundingStream = environmentVariables.FundingsApiUri.IsMockUri() ? null : fundingStream;

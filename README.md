@@ -1,8 +1,10 @@
-# Manage Your Education and Skills Funding Feed Reader Function
+# Manage Your Education and Skills Funding View Your Funding Allocation Feed Reader Function
 
-The Manage Your Education and Skills Funding (MYESF) funding feed reader allows the following:
+The Manage Your Education and Skills Funding (MYESF) View Your Funding (VYF) allocation feed reader performs the following:
 
-- ??
+- Read the funding allocation notifications from the Calculate Funding Service (CFS) service and stores them in a Cosmos DB collection for use by the VYF service.
+- The feed reader is triggered by a timer, which will run on a schedule defined by a CRON expression in the application settings, where it will process allocations notifications for funding streams which have been configured to be read automatically.
+- The feed reader can also be triggered manually via an HTTP request, which will process all funding streams regardless of whether they have been configured to be read automatically or not.
 
 ## Provider
 
@@ -10,7 +12,7 @@ The Manage Your Education and Skills Funding (MYESF) funding feed reader allows 
 
 ## About this project
 
-This project is a .Net 8 Isolated Worker Azure Function project utilizing an Azure Function App for deployment.
+This project is a .Net 6 Azure Function project utilizing an Azure Function App for deployment.
 
 **Note:** The project is currently being updated to be containerised via Docker where the deployment method and target will change, this document will be updated when these changes have been finalised.
 
@@ -21,132 +23,92 @@ In order to run the application locally a valid `local.settings.json` file will 
 ## Application Settings (`local.settings.json`)
 
 ```json
- {
-
-    "IsEncrypted": false,
-
-    "Values": {
-
-      "AzureWebJobsStorage": "",
-
-      "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-
-      "timerInterval": "",
-
-      "runMode": "", 
-
-      "taskBatchSize": "",
-
-      "includeReindex": ,
-
-      "cdb:endpointUri": "",
-
-      "cdb:endpointKey": "",
-
-      "cdb:dbName": "",
-
-      "cdb:fundingGroupCollectionName": "",
-
-      "cdb:providerFundingCollectionName": "",
-
-      "cdb:auditCollectionName": "",
-
-      "cdb:throughputSize": "",
-
-      "cdb:throughputWaitTimeSeconds": "",
-
-      "cdb:programaticallyChangeThroughput": "",
-
-      "LOCAL_cdb:endpointUri": "",
-
-      "LOCAL_cdb:endpointKey": "",
-
-      "DEV_cdb:endpointUri": "",
-
-      "DEV_cdb:endpointKey": "",
-
-      "LocalfundingsApi:baseUrl": "",
-
-      "fundingsApi:pageSize": "250",
-
-      "LOCAL_fundingsApi:baseUrl": "",
-
-      "CFSTest_fundingsApi:baseUrl": "",
-
-      "fundingsApi:baseUrl": "",
-
-      "ai:environment": "",
-
-      "ai:InstrumentationKey": "",
-
-      "as:adminKey": "",
-
-      "as:name": "",
-
-      "auth:useAuthentication": "true",
-
-      "auth:authority": "",
-
-      "auth:tenantId": "",
-
-      "local_auth:clientId": "",
-
-      "local_auth:clientSecret": "",
-
-      "auth:clientId": "",
-
-      "auth:clientSecret": "",
-
-      "auth:appIdUri": "",
-
-      "CFSTest_auth:clientId": "",
-
-      "CFSTest_auth:clientSecret": "",
-
-      "CFSTest_auth:appIdUri": "",
-
-      "vyf:baseUri": "",
-
-      "vyf:autoPullEndpointUri": "",
-
-      "vyf:apiKey": "",
-
-      "sb:connectionString": ""
-
-    }
-
+{
+  "IsEncrypted": false,
+  "Values": {
+    "ai:environment": "",
+    "ai:instrumentationKey": "",
+    "as:adminKey": "",
+    "as:name": "",
+    "auth:useAuthentication": "true",
+    "auth:authority": "",
+    "auth:tenantId": "",
+    "auth:clientId": "",
+    "auth:clientSecret": "",
+    "auth:appIdUri": "",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+    "cdb:endpointUri": "",
+    "cdb:endpointKey": "",
+    "cdb:dbName": "",
+    "cdb:fundingGroupCollectionName": "",
+    "cdb:providerFundingCollectionName": "",
+    "cdb:auditCollectionName": "",
+    "cdb:throughputSize": "",
+    "cdb:throughputWaitTimeSeconds": "",
+    "cdb:programaticallyChangeThroughput": "",
+    "environment": "local",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "FUNCTIONS_EXTENSION_VERSION": "~4",
+    "fundingsApi:pageSize": "250",
+    "fundingsApi:baseUrl": "",
+    "runMode": "",
+    "sb:connectionString": "",
+    "taskBatchSize": "",
+    "timerInterval": "",
+    "vyf:baseUri": "",
+    "vyf:autoPullEndpointUri": "",
+    "vyf:apiKey": ""
   }
- 
+}
 ```
 
 ### Setting Details
 
+- **`ai:environment`**  
+  The environment name used by the application logging framework for sending telemetry and diagnostics to Application Insights.
+
+- **`ai:InstrumentationKey`**  
+  The instrumentation key used by the application logging framework for sending telemetry and diagnostics to Application Insights.
+
+- **`as:adminKey`**  
+  The unique key used by the Azure Search service for funding data indexing and searching.
+  
+- **`as:name`**  
+  The name of the Azure Search service used for funding data indexing and searching.
+
+- **`auth:useAuthentication`**  
+  The value which determines whether authentication is used for the funding feed reader process.
+  
+- **`auth:authority`**  
+  The url of the azure ad service used to authenticate the CFS api.
+
+- **`auth:tenantId`**  
+  The unique identifier for the CFS api azure ad tenant.
+
+- **`auth:clientId`**  
+  The application (client) ID registered in azure ad for the CFS api.
+  
+- **`auth:clientSecret`**  
+  The application (client) secret registered in azure ad for the CFS api.
+
+- **`auth:appIdUri`**  
+  The intended recipient of the microsoft azure authentication token for the CFS api.
+
 - **`AzureWebJobsStorage`**  
   The Azure Storage connection string required by the Azure Functions runtime for operation and trigger management.
- 
-- **`FUNCTIONS_WORKER_RUNTIME`**  
-  dotnet.
 
-- **`timerInterval`**  
-  The CRON expression defining the schedule used by the timer-triggered funding feed reader process.
-
-- **`runMode`**  
-  The conditional value for how the process should handle feed reader functions based on environment.
-
-- **`taskBatchSize`**  
-  Integer value of batch size of funding feed reader to process.
-
-- **`includeReindex`**  
-  Boolean value to include reindexing or not.
+- **`AzureWebJobsDashboard`**  
+  The Azure Storage jobs dashboard configuration setting to resolve issues with local running.
 
 - **`cdb:endpointUri`**  
-  Unique Cosmos Db URI to use for local environment.
+  The url of the Cosmos Db resource.
 
 - **`cdb:endpointKey`**  
-  Unique Cosmos Db end point connection string key value.
+  The unique key used to access the Cosmos Db resource.
 
 - **`cdb:dbName`**  
-  Name of the Cosmos Db database to use.
+  The name of the Cosmos Db database used for funding data.
 
 - **`cdb:fundingGroupCollectionName`**  
   The name of the Cosmos Db collection used for funding data.
@@ -158,94 +120,49 @@ In order to run the application locally a valid `local.settings.json` file will 
   The name of the Cosmos Db collection used for audit purposes.
 
 - **`cdb:throughputSize`**  
-  Numeric value of max throughput size of the Cosmos Db results.
+  The value which determines the throughput rate for the Cosmos Db resource.
 
 - **`cdb:throughputWaitTimeSeconds`**  
-  Numeric value of time designated for throughput function to work to get data from Cosmos Db.
+  The value which determines the wait time for updating throughput rate for Cosmos Db.
 
 - **`cdb:programaticallyChangeThroughput`**  
-  Boolean value for throughput change for Cosmos Db.
-  
-- **`LOCAL_cdb:endpointUri`**  
-  Unique Cosmos Db URI link for the local environment.
-  
-- **`LOCAL_cdb:endpointKey`**  
-  Unique Cosmos Db URI connection string key for the local environment.
-  
-- **`DEV_cdb:endpointUri`**  
-  Unique Cosmos Db URI link for the developer environment.
-  
-- **`DEV_cdb:endpointKey`**  
-  Unique Cosmos Db URI connection string key for the developer environment.
+  The value which determines whether the throughput rate for the Cosmos Db resource can be updated programmatically.
 
-- **`LocalfundingsApi:baseUrl`**  
-  Unique local funding base api url for mockicg.
-  
+- **`environment`**  
+  The environment which the application is running.
+ 
+- **`FUNCTIONS_WORKER_RUNTIME`**  
+  The worker runtime used by the Function App.
+
+- **`FUNCTIONS_EXTENSION_VERSION`**  
+  The Azure Functions runtime version used by the application.
+
 - **`fundingsApi:pageSize`**  
-  Maximum numeric value of funding api page size.
-
-- **`LOCAL_fundingsApi:baseUrl`**  
-  Unique local funding base api url. //potentially duplicate of LocalfundingsApi:baseUrl.
-
-- **`CFSTest_fundingsApi:baseUrl`**  
-  Url link for calculate funding service test api.
+  The value which determines the page size used in requests to the CFS api for funding allocation notifications.
 
 - **`fundingsApi:baseUrl`**  
-  Unique funding base url for calculate funding swrvice.
-  
-- **`ai:environment`**  
-  Target environemnt to use value.
+  The url of the CFS api.
 
-- **`ai:InstrumentationKey`**  
-  Unique ai instrumentation key value.
+- **`runMode`**  
+  The value which determines whether the funding feed reader should process when triggers are executed.
 
-- **`as:adminKey`**  
-  Unique Azure service admin key value.
-  
-- **`as:name`**  
-  Name of the Azure service environemnt.
-  
-- **`auth:useAuthentication`**  
-  Boolean value to use authentication or not.
-  
-- **`auth:authority`**  
-  Microsoft url link for authentication.
+- **`sb:connectionString`**  
+  The connection string for the Service Bus resource.
 
-- **`auth:tenantId`**  
-  Unique microsoft tenant id.
-  
-- **`local_auth:clientId`**  
-  Unique local environemnt client id authentication key.
-  
-- **`local_auth:clientSecret`**  
-  Unique local environment client authentication secret key value.
+- **`taskBatchSize`**  
+  The value which determines the number of funding allocations which will be processed in a single batch.
 
-- **`auth:clientId`**  
-  Unique client id authentication key.
-  
-- **`auth:clientSecret`**  
-  Unique client authentication secret key value.
-  
-- **`CFSTest_auth:clientId`**  
-  Unique calculate funding service test environment client id value.
-  
-- **`CFSTest_auth:clientSecret`**  
-  Unique calculate funding service test environment client secret value.
-
-- **`CFSTest_auth:appIdUri`**  
-  Uri for calculate funding service test environment.
+- **`timerInterval`**  
+  The CRON expression defining the schedule used by the timer-triggered funding feed reader process.
 
 - **`vyf:baseUri`**  
   The url of View Your Funding external api.
 
 - **`vyf:autoPullEndpointUri`**  
-  Uri path for View Your Funding endpoint.
+  The url of the View Your Funding external api auto pull configured funding streams endpoint.
 
 - **`vyf:apiKey`**  
-  The api secret key of View Your Funding external api.
-  
-- **`sb:connectionString`**  
-  Unique connection string for the sandbox environment.
+  The secret key of View Your Funding external api.
 
 ## Build and Test
 

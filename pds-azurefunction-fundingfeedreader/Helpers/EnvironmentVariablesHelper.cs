@@ -1,10 +1,7 @@
 ﻿using Domain.Interfaces;
-using Pds_azurefunction_fundingfeedreader.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pds_azurefunction_fundingfeedreader.Helpers
 {

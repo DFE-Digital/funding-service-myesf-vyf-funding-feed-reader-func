@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Domain
+﻿namespace Domain
 {
     /// <summary>
     /// Class to enrich the Provider funding.

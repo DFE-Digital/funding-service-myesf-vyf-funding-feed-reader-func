@@ -1,5 +1,4 @@
-﻿using ApplicationLogger;
-using Clients.Exceptions;
+﻿using Clients.Exceptions;
 using Clients.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
